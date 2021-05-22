@@ -2,7 +2,7 @@ import { Track } from "./track";
 import { User } from "./user";
 
 export interface Playlist {
-  artwork_url?: number;
+  artwork_url?: string;
   created_at: Date;
   description?: string;
   duration: number;

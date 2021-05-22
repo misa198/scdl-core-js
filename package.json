@@ -1,14 +1,15 @@
 {
   "name": "scdl-core",
-  "version": "1.0.0",
+  "version": "1.0.3",
   "description": "SoundCloud downloader",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "@types"
   ],
   "scripts": {
-    "prepare" : "npm run build",
+    "prepare": "npm run build",
     "build": "tsc",
     "test": "node test/index.js",
     "test:ts": "node test/index.ts",
@@ -37,12 +38,12 @@
     "@types/node": "^15.6.0",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
-    "axios": "^0.21.1",
     "eslint": "^7.27.0",
     "ts-node": "^9.1.1",
     "typescript": "^4.2.4"
   },
   "dependencies": {
+    "axios": "^0.21.1",
     "m3u8stream": "^0.8.0"
   }
 }
