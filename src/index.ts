@@ -23,5 +23,8 @@ export class SoundCloud {
   };
 }
 
+export { Album } from "../@types/album";
+export { Playlist } from "../@types/playlist";
 export { SearchOptions, SearchResponse } from "../@types/search";
 export { Track } from "../@types/track";
+export { User } from "../@types/user";
