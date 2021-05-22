@@ -27,11 +27,14 @@
   },
   "homepage": "https://github.com/misa198/scdl-core#readme",
   "devDependencies": {
+    "@types/node": "^15.6.0",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
     "axios": "^0.21.1",
     "eslint": "^7.27.0",
     "typescript": "^4.2.4"
   },
-  "dependencies": {}
+  "dependencies": {
+    "m3u8stream": "^0.8.0"
+  }
 }

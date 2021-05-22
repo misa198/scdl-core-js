@@ -6,6 +6,18 @@ interface Visual {
   visual_url: string;
 }
 
+export interface Transcoding {
+  url: string;
+  preset: string;
+  duration: number;
+  snipped: boolean;
+  format: {
+    protocol: string;
+    mime_type: string;
+  };
+  quality: string;
+}
+
 export interface Track {
   artwork_url?: string;
   caption?: string;
@@ -61,17 +73,7 @@ export interface Track {
   waveform_url: string;
   display_date: Date;
   media: {
-    transcodings: {
-      url: string;
-      preset: string;
-      duration: number;
-      snipped: boolean;
-      format: {
-        protocol: string;
-        mime_type: string;
-      };
-      quality: string;
-    }[];
+    transcodings: Transcoding[];
   };
   station_permalink: string;
   monetization_model: string;

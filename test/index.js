@@ -18,13 +18,13 @@ const soundCloud = new SoundCloud();
 
   // console.log(track);
 
-  const playlist = await soundCloud.info.getPlaylistByPermalink(
-    "https://soundcloud.com/den1305/sets/en-v-u"
-  );
+  // const playlist = await soundCloud.info.getPlaylistByPermalink(
+  //   "https://soundcloud.com/den1305/sets/en-v-u"
+  // );
 
-  fs.writeFileSync(`${__dirname}/data.json`, JSON.stringify(playlist), {
-    encoding: "utf-8",
-  });
+  // fs.writeFileSync(`${__dirname}/data.json`, JSON.stringify(playlist), {
+  //   encoding: "utf-8",
+  // });
 
   // console.log(playlist);
 
@@ -32,4 +32,8 @@ const soundCloud = new SoundCloud();
   //   531329904, 912310699, 912120631,
   // ]);
   // console.log(tracks);
+
+  await soundCloud
+    .download("https://soundcloud.com/den1305/den-tron-tim-ft-mtv-band")
+    .then((res) => res.pipe(fs.createWriteStream(`${__dirname}/a.mp3`)));
 })();

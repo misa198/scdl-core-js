@@ -1,4 +1,4 @@
-import { SearchOptions, SearchResponse } from "../@types/search";
+import * as m3u8stream from "m3u8stream";
 
 import { getClientId } from "./services/get-client-id";
 import { search } from "./services/search";
@@ -8,9 +8,13 @@ import {
   getTracksByIds,
   getUserByPermalink,
 } from "./services/get-info";
+import { download } from "./services/download";
+
 import { Track } from "../@types/track";
 import { Playlist } from "../@types/playlist";
 import { User } from "../@types/user";
+import { DownloadOptions } from "../@types/download";
+import { SearchOptions, SearchResponse } from "../@types/search";
 
 export class SoundCloud {
   private clientId: string;
@@ -43,6 +47,13 @@ export class SoundCloud {
 
     getUserByPermalink: async (url: string): Promise<User> =>
       await getUserByPermalink(this.clientId, url),
+  };
+
+  public download = async (
+    url: string,
+    downloadOptions?: DownloadOptions
+  ): Promise<m3u8stream.Stream> => {
+    return await download(this.clientId, url, downloadOptions);
   };
 }
 

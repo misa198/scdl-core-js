@@ -40,6 +40,7 @@ exports.SoundCloud = void 0;
 var get_client_id_1 = require("./services/get-client-id");
 var search_1 = require("./services/search");
 var get_info_1 = require("./services/get-info");
+var download_1 = require("./services/download");
 var SoundCloud = /** @class */ (function () {
     function SoundCloud() {
         var _this = this;
@@ -81,9 +82,24 @@ var SoundCloud = /** @class */ (function () {
                     case 1: return [2 /*return*/, _a.sent()];
                 }
             }); }); },
+            getUserByPermalink: function (url) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, get_info_1.getUserByPermalink(this.clientId, url)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            }); }); },
         };
+        this.download = function (url, downloadOptions) { return __awaiter(_this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, download_1.download(this.clientId, url, downloadOptions)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            });
+        }); };
         this.clientId = "";
     }
     return SoundCloud;
 }());
 exports.SoundCloud = SoundCloud;
+//# sourceMappingURL=index.js.map

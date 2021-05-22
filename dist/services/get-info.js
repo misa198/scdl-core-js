@@ -35,9 +35,12 @@ var __generator = (this && this.__generator) || function (thisArg, body) {
         if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
     }
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getTrackByPermalink = exports.getPlaylistByPermalink = exports.getTracksByIds = void 0;
-var axios_1 = require("axios");
+exports.getUserByPermalink = exports.getTrackByPermalink = exports.getPlaylistByPermalink = exports.getTracksByIds = void 0;
+var axios_1 = __importDefault(require("axios"));
 var configs_1 = require("../constants/configs");
 var getTracksByIds = function (clientId, id) { return __awaiter(void 0, void 0, void 0, function () {
     var ids, url, response;
@@ -108,3 +111,16 @@ var getTrackByPermalink = function (clientId, url) { return __awaiter(void 0, vo
     });
 }); };
 exports.getTrackByPermalink = getTrackByPermalink;
+var getUserByPermalink = function (clientId, url) { return __awaiter(void 0, void 0, void 0, function () {
+    var user;
+    return __generator(this, function (_a) {
+        switch (_a.label) {
+            case 0: return [4 /*yield*/, getSingleItemInfo(clientId, url)];
+            case 1:
+                user = (_a.sent());
+                return [2 /*return*/, user];
+        }
+    });
+}); };
+exports.getUserByPermalink = getUserByPermalink;
+//# sourceMappingURL=get-info.js.map

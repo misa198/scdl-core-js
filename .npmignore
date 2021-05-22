@@ -1,0 +1,6 @@
+test/
+node_modules/
+.eslint
+.eslintignore
+.editorconfig
+.DS_Store
