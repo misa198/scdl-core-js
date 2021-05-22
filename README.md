@@ -62,6 +62,26 @@ scdl.info.getPlaylistByPermalink(permalink: string)
 scdl.info.getUserByPermalink(permalink: string)
 ```
 
+#### download
+
+```js
+scdl.download(permalink: string)
+```
+
+Use with Discord.js
+
+```js
+const voiceChannel = message.member.voiceChannel;
+voiceChannel
+  .join()
+  .then((connection) => {
+    scdl.download(permalink).then((stream) => {
+      connection.play(stream);
+    });
+  })
+  .catch((err) => console.log(err));
+```
+
 # Install
 
 ```bash
