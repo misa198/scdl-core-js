@@ -1,4 +1,3 @@
-import { Album } from "./album";
 import { Playlist } from "./playlist";
 import { Track } from "./track";
 import { User } from "./user";
@@ -12,7 +11,7 @@ export interface SearchOptions {
   filter?: Filter;
 }
 
-export interface SearchResponse<T = Album | Playlist | Track | User> {
+export interface SearchResponse<T = Playlist | Track | User> {
   collection: T[];
   total_results: number;
   next_href?: string;
