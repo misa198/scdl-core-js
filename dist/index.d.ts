@@ -1,15 +1,17 @@
-import { Album } from "../@types/album";
-import { Playlist } from "../@types/playlist";
 import { SearchOptions, SearchResponse } from "../@types/search";
 import { Track } from "../@types/track";
-import { User } from "../@types/user";
+import { Playlist } from "../@types/playlist";
 export declare class SoundCloud {
     private clientId;
     constructor();
     connect: () => Promise<void>;
-    search: (searchOptions: SearchOptions) => Promise<SearchResponse<Album | Playlist | User | Track>>;
+    search: (searchOptions: SearchOptions) => Promise<SearchResponse>;
+    info: {
+        getTracksByIds: (ids: number[]) => Promise<Track[]>;
+        getPlaylistByPermalink: (url: string) => Promise<Playlist>;
+        getTrackByPermalink: (url: string) => Promise<Track>;
+    };
 }
-export { Album } from "../@types/album";
 export { Playlist } from "../@types/playlist";
 export { SearchOptions, SearchResponse } from "../@types/search";
 export { Track } from "../@types/track";

@@ -39,6 +39,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.SoundCloud = void 0;
 var get_client_id_1 = require("./services/get-client-id");
 var search_1 = require("./services/search");
+var get_info_1 = require("./services/get-info");
 var SoundCloud = /** @class */ (function () {
     function SoundCloud() {
         var _this = this;
@@ -61,6 +62,26 @@ var SoundCloud = /** @class */ (function () {
                 return [2 /*return*/, search_1.search(this.clientId, searchOptions)];
             });
         }); };
+        this.info = {
+            getTracksByIds: function (ids) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, get_info_1.getTracksByIds(this.clientId, ids)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            }); }); },
+            getPlaylistByPermalink: function (url) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, get_info_1.getPlaylistByPermalink(this.clientId, url)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            }); }); },
+            getTrackByPermalink: function (url) { return __awaiter(_this, void 0, void 0, function () { return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, get_info_1.getTrackByPermalink(this.clientId, url)];
+                    case 1: return [2 /*return*/, _a.sent()];
+                }
+            }); }); },
+        };
         this.clientId = "";
     }
     return SoundCloud;
