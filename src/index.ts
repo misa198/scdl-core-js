@@ -6,9 +6,11 @@ import {
   getPlaylistByPermalink,
   getTrackByPermalink,
   getTracksByIds,
+  getUserByPermalink,
 } from "./services/get-info";
 import { Track } from "../@types/track";
 import { Playlist } from "../@types/playlist";
+import { User } from "../@types/user";
 
 export class SoundCloud {
   private clientId: string;
@@ -38,6 +40,9 @@ export class SoundCloud {
 
     getTrackByPermalink: async (url: string): Promise<Track> =>
       await getTrackByPermalink(this.clientId, url),
+
+    getUserByPermalink: async (url: string): Promise<User> =>
+      await getUserByPermalink(this.clientId, url),
   };
 }
 

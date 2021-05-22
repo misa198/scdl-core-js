@@ -58,3 +58,11 @@ export const getTrackByPermalink = async (
   const track = (await getSingleItemInfo(clientId, url)) as Track;
   return track;
 };
+
+export const getUserByPermalink = async (
+  clientId: string,
+  url: string
+): Promise<User> => {
+  const user = (await getSingleItemInfo(clientId, url)) as User;
+  return user;
+};
