@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "SoundCloud downloader",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
+    "prepare" : "npm run build",
     "build": "tsc",
     "test": "node test/index.js",
     "test:ts": "node test/index.ts",
