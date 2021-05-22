@@ -7,7 +7,7 @@ const soundCloud = new SoundCloud();
 
   const searchResult = await soundCloud.search({
     query: "Tron tim",
-    filter: "tracks",
+    filter: "users",
   });
-  console.log(searchResult);
+  console.log(searchResult.collection[0]);
 })();

@@ -1,4 +1,8 @@
+import { Album } from "../@types/album";
+import { Playlist } from "../@types/playlist";
 import { SearchOptions, SearchResponse } from "../@types/search";
+import { Track } from "../@types/track";
+import { User } from "../@types/user";
 
 import { getClientId } from "./services/get-client-id";
 import { search } from "./services/search";
@@ -17,7 +21,7 @@ export class SoundCloud {
 
   public search = async (
     searchOptions: SearchOptions
-  ): Promise<SearchResponse> => {
+  ): Promise<SearchResponse<Album | Playlist | User | Track>> => {
     if (!this.clientId) throw Error("Require client_id");
     return search(this.clientId, searchOptions);
   };

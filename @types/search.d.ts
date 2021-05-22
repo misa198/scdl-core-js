@@ -12,8 +12,8 @@ export interface SearchOptions {
   filter?: Filter;
 }
 
-export interface SearchResponse {
-  collection: Track[] | User[] | Playlist[] | Album[];
+export interface SearchResponse<T = Album | Playlist | Track | User> {
+  collection: T[];
   total_results: number;
   next_href?: string;
   query_urn: string;
