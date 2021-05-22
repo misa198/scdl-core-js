@@ -22,3 +22,6 @@ export class SoundCloud {
     return search(this.clientId, searchOptions);
   };
 }
+
+export { SearchOptions, SearchResponse } from "../@types/search";
+export { Track } from "../@types/track";
