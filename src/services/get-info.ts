@@ -14,8 +14,12 @@ export const getTracksByIds = async (
   const url = encodeURI(
     `${apiBaseUrl}/tracks?ids=${ids}&client_id=${clientId}`
   );
-  const response = await axios.get(url);
-  return response.data;
+  try {
+    const response = await axios.get(url);
+    return response.data;
+  } catch (e) {
+    throw "Invalid ids";
+  }
 };
 
 const getSingleItemInfo = async (
@@ -23,15 +27,24 @@ const getSingleItemInfo = async (
   url: string
 ): Promise<Playlist | Track | User> => {
   const requestUrl = `${apiBaseUrl}/resolve?url=${url}&client_id=${clientId}`;
-  const response = await axios.get(requestUrl);
-  return response.data;
+  try {
+    const response = await axios.get(requestUrl);
+    return response.data;
+  } catch (e) {
+    throw "Invalid url";
+  }
 };
 
 export const getPlaylistByPermalink = async (
   clientId: string,
   url: string
 ): Promise<Playlist> => {
-  const playlist = (await getSingleItemInfo(clientId, url)) as Playlist;
+  let playlist: Playlist;
+  try {
+    playlist = (await getSingleItemInfo(clientId, url)) as Playlist;
+  } catch (e) {
+    throw "Invalid url";
+  }
   const tracks = playlist.tracks;
 
   let loadedTracks: Track[] = [];
@@ -55,14 +68,22 @@ export const getTrackByPermalink = async (
   clientId: string,
   url: string
 ): Promise<Track> => {
-  const track = (await getSingleItemInfo(clientId, url)) as Track;
-  return track;
+  try {
+    const track = (await getSingleItemInfo(clientId, url)) as Track;
+    return track;
+  } catch (e) {
+    throw "Invalid url";
+  }
 };
 
 export const getUserByPermalink = async (
   clientId: string,
   url: string
 ): Promise<User> => {
-  const user = (await getSingleItemInfo(clientId, url)) as User;
-  return user;
+  try {
+    const user = (await getSingleItemInfo(clientId, url)) as User;
+    return user;
+  } catch (e) {
+    throw "Invalid url";
+  }
 };

@@ -5,22 +5,30 @@ import { DownloadOptions } from "../../@types/download";
 import { getTrackByPermalink } from "./get-info";
 
 const getTrackStream = (url: string, downloadOptions?: DownloadOptions) => {
-  return m3u8stream.default(url, {
-    highWaterMark: downloadOptions?.highWaterMark || 16,
-  });
+  try {
+    return m3u8stream.default(url, {
+      highWaterMark: downloadOptions?.highWaterMark || 16,
+    });
+  } catch (e) {
+    throw "Invalid url";
+  }
 };
 
 const getM3u8Url = async (clientId: string, url: string): Promise<string> => {
   const _url = `${url}?client_id=${clientId}`;
-  const response = await axios.get(_url, {
-    headers: {
-      "User-Agent":
-        "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
-      Accept: "*/*",
-      "Accept-Encoding": "gzip, deflate, br",
-    },
-  });
-  return response.data.url;
+  try {
+    const response = await axios.get(_url, {
+      headers: {
+        "User-Agent":
+          "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
+        Accept: "*/*",
+        "Accept-Encoding": "gzip, deflate, br",
+      },
+    });
+    return response.data.url;
+  } catch (e) {
+    throw "Invalid url";
+  }
 };
 
 export const download = async (
@@ -39,7 +47,7 @@ export const download = async (
     }
     i++;
   }
-  if (!transcoding) throw new Error("Invalid url!");
+  if (!transcoding) throw "Invalid url!";
 
   const m3u8Url = await getM3u8Url(clientId, transcoding.url);
 

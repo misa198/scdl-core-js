@@ -43,7 +43,7 @@ exports.search = void 0;
 var axios_1 = __importDefault(require("axios"));
 var configs_1 = require("../constants/configs");
 var search = function (clientId, searchOptions) { return __awaiter(void 0, void 0, void 0, function () {
-    var query, _a, limit, _b, offset, _c, filter, path, baseUrl, url, response;
+    var query, _a, limit, _b, offset, _c, filter, path, baseUrl, url, response, e_1;
     return __generator(this, function (_d) {
         switch (_d.label) {
             case 0:
@@ -51,10 +51,17 @@ var search = function (clientId, searchOptions) { return __awaiter(void 0, void 
                 path = filter === "all" ? "" : "/" + filter;
                 baseUrl = configs_1.apiBaseUrl + "/search" + path;
                 url = encodeURI(baseUrl + "?q=" + query + "&limit=" + limit + "&offset=" + offset + "&access=playable&client_id=" + clientId);
-                return [4 /*yield*/, axios_1.default.get(url)];
+                _d.label = 1;
             case 1:
+                _d.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, axios_1.default.get(url)];
+            case 2:
                 response = _d.sent();
                 return [2 /*return*/, response.data];
+            case 3:
+                e_1 = _d.sent();
+                throw "Invalid query";
+            case 4: return [2 /*return*/];
         }
     });
 }); };

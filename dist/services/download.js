@@ -63,17 +63,24 @@ var axios_1 = __importDefault(require("axios"));
 var m3u8stream = __importStar(require("m3u8stream"));
 var get_info_1 = require("./get-info");
 var getTrackStream = function (url, downloadOptions) {
-    console.log(url);
-    return m3u8stream.default(url, {
-        highWaterMark: (downloadOptions === null || downloadOptions === void 0 ? void 0 : downloadOptions.highWaterMark) || 16,
-    });
+    try {
+        return m3u8stream.default(url, {
+            highWaterMark: (downloadOptions === null || downloadOptions === void 0 ? void 0 : downloadOptions.highWaterMark) || 16,
+        });
+    }
+    catch (e) {
+        throw "Invalid url";
+    }
 };
 var getM3u8Url = function (clientId, url) { return __awaiter(void 0, void 0, void 0, function () {
-    var _url, response;
+    var _url, response, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 _url = url + "?client_id=" + clientId;
+                _a.label = 1;
+            case 1:
+                _a.trys.push([1, 3, , 4]);
                 return [4 /*yield*/, axios_1.default.get(_url, {
                         headers: {
                             "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/90.0.4430.212 Safari/537.36",
@@ -81,9 +88,13 @@ var getM3u8Url = function (clientId, url) { return __awaiter(void 0, void 0, voi
                             "Accept-Encoding": "gzip, deflate, br",
                         },
                     })];
-            case 1:
+            case 2:
                 response = _a.sent();
                 return [2 /*return*/, response.data.url];
+            case 3:
+                e_1 = _a.sent();
+                throw "Invalid url";
+            case 4: return [2 /*return*/];
         }
     });
 }); };
@@ -105,7 +116,7 @@ var download = function (clientId, url, downloadOptions) { return __awaiter(void
                     i++;
                 }
                 if (!transcoding)
-                    throw new Error("Invalid url!");
+                    throw "Invalid url!";
                 return [4 /*yield*/, getM3u8Url(clientId, transcoding.url)];
             case 2:
                 m3u8Url = _a.sent();

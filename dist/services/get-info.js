@@ -43,40 +43,61 @@ exports.getUserByPermalink = exports.getTrackByPermalink = exports.getPlaylistBy
 var axios_1 = __importDefault(require("axios"));
 var configs_1 = require("../constants/configs");
 var getTracksByIds = function (clientId, id) { return __awaiter(void 0, void 0, void 0, function () {
-    var ids, url, response;
+    var ids, url, response, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 ids = id.join(",");
                 url = encodeURI(configs_1.apiBaseUrl + "/tracks?ids=" + ids + "&client_id=" + clientId);
-                return [4 /*yield*/, axios_1.default.get(url)];
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, axios_1.default.get(url)];
+            case 2:
                 response = _a.sent();
                 return [2 /*return*/, response.data];
+            case 3:
+                e_1 = _a.sent();
+                throw "Invalid ids";
+            case 4: return [2 /*return*/];
         }
     });
 }); };
 exports.getTracksByIds = getTracksByIds;
 var getSingleItemInfo = function (clientId, url) { return __awaiter(void 0, void 0, void 0, function () {
-    var requestUrl, response;
+    var requestUrl, response, e_2;
     return __generator(this, function (_a) {
         switch (_a.label) {
             case 0:
                 requestUrl = configs_1.apiBaseUrl + "/resolve?url=" + url + "&client_id=" + clientId;
-                return [4 /*yield*/, axios_1.default.get(requestUrl)];
+                _a.label = 1;
             case 1:
+                _a.trys.push([1, 3, , 4]);
+                return [4 /*yield*/, axios_1.default.get(requestUrl)];
+            case 2:
                 response = _a.sent();
                 return [2 /*return*/, response.data];
+            case 3:
+                e_2 = _a.sent();
+                throw "Invalid url";
+            case 4: return [2 /*return*/];
         }
     });
 }); };
 var getPlaylistByPermalink = function (clientId, url) { return __awaiter(void 0, void 0, void 0, function () {
-    var playlist, tracks, loadedTracks, unloadedTrackIds, response;
+    var playlist, e_3, tracks, loadedTracks, unloadedTrackIds, response;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, getSingleItemInfo(clientId, url)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, getSingleItemInfo(clientId, url)];
             case 1:
                 playlist = (_a.sent());
+                return [3 /*break*/, 3];
+            case 2:
+                e_3 = _a.sent();
+                throw "Invalid url";
+            case 3:
                 tracks = playlist.tracks;
                 loadedTracks = [];
                 unloadedTrackIds = [];
@@ -86,13 +107,13 @@ var getPlaylistByPermalink = function (clientId, url) { return __awaiter(void 0,
                     else
                         unloadedTrackIds.push(track.id);
                 });
-                if (!(unloadedTrackIds.length > 0)) return [3 /*break*/, 3];
+                if (!(unloadedTrackIds.length > 0)) return [3 /*break*/, 5];
                 return [4 /*yield*/, exports.getTracksByIds(clientId, unloadedTrackIds)];
-            case 2:
+            case 4:
                 response = _a.sent();
                 loadedTracks = loadedTracks.concat(response);
-                _a.label = 3;
-            case 3:
+                _a.label = 5;
+            case 5:
                 playlist.tracks = loadedTracks;
                 return [2 /*return*/, playlist];
         }
@@ -100,25 +121,37 @@ var getPlaylistByPermalink = function (clientId, url) { return __awaiter(void 0,
 }); };
 exports.getPlaylistByPermalink = getPlaylistByPermalink;
 var getTrackByPermalink = function (clientId, url) { return __awaiter(void 0, void 0, void 0, function () {
-    var track;
+    var track, e_4;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, getSingleItemInfo(clientId, url)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, getSingleItemInfo(clientId, url)];
             case 1:
                 track = (_a.sent());
                 return [2 /*return*/, track];
+            case 2:
+                e_4 = _a.sent();
+                throw "Invalid url";
+            case 3: return [2 /*return*/];
         }
     });
 }); };
 exports.getTrackByPermalink = getTrackByPermalink;
 var getUserByPermalink = function (clientId, url) { return __awaiter(void 0, void 0, void 0, function () {
-    var user;
+    var user, e_5;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, getSingleItemInfo(clientId, url)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, getSingleItemInfo(clientId, url)];
             case 1:
                 user = (_a.sent());
                 return [2 /*return*/, user];
+            case 2:
+                e_5 = _a.sent();
+                throw "Invalid url";
+            case 3: return [2 /*return*/];
         }
     });
 }); };

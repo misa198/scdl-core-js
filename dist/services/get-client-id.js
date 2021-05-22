@@ -44,16 +44,22 @@ var axios_1 = __importDefault(require("axios"));
 var regex_1 = require("../constants/regex");
 var configs_1 = require("../constants/configs");
 var getClientId = function () { return __awaiter(void 0, void 0, void 0, function () {
-    var response, matchResult;
+    var response, matchResult, e_1;
     return __generator(this, function (_a) {
         switch (_a.label) {
-            case 0: return [4 /*yield*/, axios_1.default(configs_1.clientIdUrl)];
+            case 0:
+                _a.trys.push([0, 2, , 3]);
+                return [4 /*yield*/, axios_1.default(configs_1.clientIdUrl)];
             case 1:
                 response = _a.sent();
                 matchResult = response.data.match(regex_1.clientIdRegex);
                 if (matchResult === null)
-                    throw new Error("Can't get client id");
+                    throw "Can't get client id";
                 return [2 /*return*/, matchResult[1]];
+            case 2:
+                e_1 = _a.sent();
+                throw "Can't get client id";
+            case 3: return [2 /*return*/];
         }
     });
 }); };

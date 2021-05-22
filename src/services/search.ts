@@ -14,6 +14,10 @@ export const search = async (
     `${baseUrl}?q=${query}&limit=${limit}&offset=${offset}&access=playable&client_id=${clientId}`
   );
 
-  const response = await axios.get(url);
-  return response.data as SearchResponse;
+  try {
+    const response = await axios.get(url);
+    return response.data as SearchResponse;
+  } catch (e) {
+    throw "Invalid query";
+  }
 };
