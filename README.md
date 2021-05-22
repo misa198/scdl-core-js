@@ -65,7 +65,7 @@ scdl.info.getUserByPermalink(permalink: string)
 #### download
 
 ```js
-scdl.download(permalink: string)
+scdl.download(trackPermalink: string)
 ```
 
 Use with Discord.js
@@ -75,7 +75,7 @@ const voiceChannel = message.member.voiceChannel;
 voiceChannel
   .join()
   .then((connection) => {
-    scdl.download(permalink).then((stream) => {
+    scdl.download(trackPermalink).then((stream) => {
       connection.play(stream);
     });
   })
