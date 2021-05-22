@@ -11,7 +11,7 @@
 
 ```js
 const fs = require("fs");
-const { SoundCloud } = required("scdl-core");
+const { SoundCloud } = require("scdl-core");
 
 const scdl = new SoundCloud();
 scdl.connect().then(() => {
@@ -19,7 +19,7 @@ scdl.connect().then(() => {
     .download(
       "https://soundcloud.com/r3hab/the-chainsmokers-coldplay-something-just-like-this-r3hab-remix"
     )
-    .pipe(fs.createWriteStream("audio.mp3"));
+    .then((res) => res.pipe(fs.createWriteStream("audio.mp3")));
 });
 ```
 
