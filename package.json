@@ -33,7 +33,5 @@
     "eslint": "^7.27.0",
     "typescript": "^4.2.4"
   },
-  "dependencies": {
-    "query-string": "^7.0.0"
-  }
+  "dependencies": {}
 }
