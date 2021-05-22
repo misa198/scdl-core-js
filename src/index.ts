@@ -21,7 +21,7 @@ export class SoundCloud {
 
   public search = async (
     searchOptions: SearchOptions
-  ): Promise<SearchResponse<Album | Playlist | User | Track>> => {
+  ): Promise<SearchResponse> => {
     if (!this.clientId) throw Error("Require client_id");
     return search(this.clientId, searchOptions);
   };
