@@ -33,7 +33,13 @@ const soundCloud = new SoundCloud();
   // ]);
   // console.log(tracks);
 
-  await soundCloud
-    .download("https://soundcloud.com/den1305/den-tron-tim-ft-mtv-band")
-    .then((res) => res.pipe(fs.createWriteStream(`${__dirname}/a.mp3`)));
+  try {
+    soundCloud
+      .download(
+        "https://soundcloud.com/den1305/den-xce-nha?in=den1305/csdkncksdncksdc"
+      )
+      .then((res) => res.pipe(fs.createWriteStream(`${__dirname}/a.mp3`)));
+  } catch (e) {
+    console.log("Error");
+  }
 })();
