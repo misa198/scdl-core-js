@@ -1,24 +1,21 @@
 {
   "compilerOptions": {
+    "target": "es5",
     "module": "commonjs",
-    "esModuleInterop": true,
-    "target": "es6",
-    "noImplicitAny": true,
-    "moduleResolution": "node",
-    "sourceMap": false,
-    "outDir": "dist",
-    "baseUrl": ".",
-    "paths": {
-      "*": [
-        "node_modules/*"
-      ]
-    },
+    "declaration": true,
+    "outDir": "./dist",
+    "strict": true,
+    "lib": [
+      "es2015",
+      "dom"
+    ],
   },
   "include": [
-    "src/**/*"
+    "src",
+    "@types",
   ],
   "exclude": [
     "node_modules",
-    "test",
-  ]
+    "test"
+  ],
 }
