@@ -53,11 +53,6 @@ export class SoundCloud {
       await getPlaylist(this.clientId, url),
   };
 
-  public user = {
-    getUser: async (url: string): Promise<User> =>
-      await getUser(this.clientId, url),
-  };
-
   public download = async (
     url: string,
     downloadOptions?: DownloadOptions
