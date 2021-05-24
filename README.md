@@ -7,6 +7,8 @@
 - Module for SoundCloud to download and get info tracks and playlists.
 - Support Typescript and Javascript.
 
+![](https://img.shields.io/badge/Author-misa198-green)
+![](https://camo.githubusercontent.com/832d01092b0e822178475741271b049a2e27df13/68747470733a2f2f62616467656e2e6e65742f62616467652f2d2f547970655363726970742f626c75653f69636f6e3d74797065736372697074266c6162656c)
 # Usage
 
 ```js
@@ -25,15 +27,26 @@ scdl.connect().then(() => {
 
 # API
 
+### connect
+
+```js
+// SoundCloud API require a client_id.
+// When you instantiate scdl object, you need to call connect method to get client_id
+
+scdl.connect().then(() => {
+  // Do something
+});
+```
+
 ### search(options)
 
 ```js
-scdl.search({
+const result = await scdl.search({
   query: string,
   limit?: number, // Default: 10
   offset?: number, // Default: 0
   filter?: 'all' | 'albums' | 'playlists' | 'users' | 'tracks' // Default: "all"
-})
+});
 ```
 
 ### info
@@ -41,31 +54,31 @@ scdl.search({
 #### tracks
 
 ```js
-scdl.info.getTracksByIds(ids: number[]);
+const tracks = await scdl.info.getTracksByIds(ids: number[]);
 ```
 
 #### track
 
 ```js
-scdl.info.getTrackByPermalink(permalink: string);
+const track = await scdl.info.getTrackByPermalink(permalink: string);
 ```
 
 #### playlist/album
 
 ```js
-scdl.info.getPlaylistByPermalink(permalink: string)
+const playlist = await scdl.info.getPlaylistByPermalink(permalink: string)
 ```
 
 #### user
 
 ```js
-scdl.info.getUserByPermalink(permalink: string)
+const user = await scdl.info.getUserByPermalink(permalink: string)
 ```
 
-#### download
+### download
 
 ```js
-scdl.download(trackPermalink: string)
+const stream = await scdl.download(trackPermalink: string)
 ```
 
 Use with Discord.js
