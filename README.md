@@ -9,6 +9,7 @@
 
 ![](https://img.shields.io/badge/Author-misa198-green)
 ![](https://camo.githubusercontent.com/832d01092b0e822178475741271b049a2e27df13/68747470733a2f2f62616467656e2e6e65742f62616467652f2d2f547970655363726970742f626c75653f69636f6e3d74797065736372697074266c6162656c)
+
 # Usage
 
 ```js
@@ -19,15 +20,15 @@ const scdl = new SoundCloud();
 scdl.connect().then(() => {
   scdl
     .download(
-      "https://soundcloud.com/r3hab/the-chainsmokers-coldplay-something-just-like-this-r3hab-remix"
+      "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
     )
-    .then((res) => res.pipe(fs.createWriteStream("audio.mp3")));
+    .then((stream) => stream.pipe(fs.createWriteStream("song.mp3")));
 });
 ```
 
 # API
 
-### connect
+## connect
 
 ```js
 // SoundCloud API require a client_id.
@@ -38,50 +39,72 @@ scdl.connect().then(() => {
 });
 ```
 
-### search(options)
+## search
 
 ```js
 const result = await scdl.search({
   query: string,
-  limit?: number, // Default: 10
+  limit?: number, // Default: 20
   offset?: number, // Default: 0
   filter?: 'all' | 'albums' | 'playlists' | 'users' | 'tracks' // Default: "all"
 });
 ```
 
-### info
+## tracks
 
-#### tracks
-
-```js
-const tracks = await scdl.info.getTracksByIds(ids: number[]);
-```
-
-#### track
+#### getTrackByIds
 
 ```js
-const track = await scdl.info.getTrackByPermalink(permalink: string);
+const ids = [578933490, 499766382];
+const tracks = await scdl.tracks.getTracksByIds(ids);
 ```
 
-#### playlist/album
+#### getTrack
 
 ```js
-const playlist = await scdl.info.getPlaylistByPermalink(permalink: string)
+const permalink =
+  "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep";
+const track = await scdl.tracks.getTrack(permalink);
 ```
 
-#### user
+#### getTrending
 
 ```js
-const user = await scdl.info.getUserByPermalink(permalink: string)
+const trendingTracks = await scdl.tracks.getTrending({
+  limit?: number, // Default: 20
+  offset?: number // Default: 0
+});
 ```
 
-### download
+## playlists/albums
+
+#### getPlaylist/getAlbum
 
 ```js
-const stream = await scdl.download(trackPermalink: string)
+const permalink =
+  "https://soundcloud.com/martingarrix/sets/martin-garrix-matisse-sadko";
+const playlist = await scdl.playlists.getPlaylist(permalink);
 ```
 
-Use with Discord.js
+## user
+
+#### getUser
+
+```js
+const permalink = "https://soundcloud.com/martingarrix";
+const user = await scdl.info.getUser(permalink);
+```
+
+## download
+
+```js
+const permalink =
+  "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep";
+const stream = await scdl.download(permalink);
+stream.pipe(fs.createWriteStream("song.mp3"));
+```
+
+#### Use with Discord.js
 
 ```js
 const voiceChannel = message.member.voiceChannel;
