@@ -1,5 +1,10 @@
 import { User } from "./user";
 
+export interface TrendingOptions {
+  limit?: number;
+  offset?: number;
+}
+
 interface Visual {
   urn: string;
   entry_time: number;

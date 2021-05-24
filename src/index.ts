@@ -2,19 +2,16 @@ import * as m3u8stream from "m3u8stream";
 
 import { getClientId } from "./services/get-client-id";
 import { search } from "./services/search";
-import {
-  getPlaylistByPermalink,
-  getTrackByPermalink,
-  getTracksByIds,
-  getUserByPermalink,
-} from "./services/get-info";
 import { download } from "./services/download";
 
-import { Track } from "../@types/track";
+import { Track, TrendingOptions } from "../@types/track";
 import { Playlist } from "../@types/playlist";
 import { User } from "../@types/user";
 import { DownloadOptions } from "../@types/download";
 import { SearchOptions, SearchResponse } from "../@types/search";
+import { getUser } from "./services/user";
+import { getTrack, getTracksByIds, getTrending } from "./services/tracks";
+import { getPlaylist } from "./services/playlist";
 
 export class SoundCloud {
   private clientId: string;
@@ -35,18 +32,30 @@ export class SoundCloud {
     return search(this.clientId, searchOptions);
   };
 
-  public info = {
+  public users = {
+    getUser: async (url: string): Promise<User> =>
+      await getUser(this.clientId, url),
+  };
+
+  public tracks = {
     getTracksByIds: async (ids: number[]): Promise<Track[]> =>
       await getTracksByIds(this.clientId, ids),
 
-    getPlaylistByPermalink: async (url: string): Promise<Playlist> =>
-      await getPlaylistByPermalink(this.clientId, url),
+    getTrack: async (url: string): Promise<Track> =>
+      await getTrack(this.clientId, url),
 
-    getTrackByPermalink: async (url: string): Promise<Track> =>
-      await getTrackByPermalink(this.clientId, url),
+    getTrending: async (options?: TrendingOptions): Promise<Track> =>
+      await getTrending(this.clientId, options),
+  };
 
-    getUserByPermalink: async (url: string): Promise<User> =>
-      await getUserByPermalink(this.clientId, url),
+  public playlists = {
+    getPlaylist: async (url: string): Promise<Playlist> =>
+      await getPlaylist(this.clientId, url),
+  };
+
+  public user = {
+    getUser: async (url: string): Promise<User> =>
+      await getUser(this.clientId, url),
   };
 
   public download = async (

@@ -7,7 +7,7 @@ export const search = async (
   clientId: string,
   searchOptions: SearchOptions
 ): Promise<SearchResponse> => {
-  const { query, limit = 10, offset = 0, filter = "all" } = searchOptions;
+  const { query, limit = 20, offset = 0, filter = "all" } = searchOptions;
   const path = filter === "all" ? "" : `/${filter}`;
   const baseUrl = `${apiBaseUrl}/search${path}`;
   const url = encodeURI(

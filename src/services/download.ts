@@ -2,7 +2,7 @@ import axios from "axios";
 import * as m3u8stream from "m3u8stream";
 
 import { DownloadOptions } from "../../@types/download";
-import { getTrackByPermalink } from "./get-info";
+import { getTrack } from "./tracks";
 
 const getTrackStream = (url: string, downloadOptions?: DownloadOptions) => {
   try {
@@ -36,7 +36,7 @@ export const download = async (
   url: string,
   downloadOptions?: DownloadOptions
 ): Promise<m3u8stream.Stream> => {
-  const track = await getTrackByPermalink(clientId, url);
+  const track = await getTrack(clientId, url);
   const transcodings = track.media.transcodings;
   let transcoding = null;
   let i = 0;
