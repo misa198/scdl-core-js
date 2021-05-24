@@ -86,13 +86,13 @@ const permalink =
 const playlist = await scdl.playlists.getPlaylist(permalink);
 ```
 
-## user
+## users
 
 #### getUser
 
 ```js
 const permalink = "https://soundcloud.com/martingarrix";
-const user = await scdl.info.getUser(permalink);
+const user = await scdl.users.getUser(permalink);
 ```
 
 ## download
