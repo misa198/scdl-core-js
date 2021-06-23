@@ -1,14 +1,14 @@
 import * as m3u8stream from "m3u8stream";
 
-import { getClientId } from "./services/get-client-id";
-import { search } from "./services/search";
-import { download } from "./services/download";
-
 import { Track, TrendingOptions } from "../@types/track";
 import { Playlist } from "../@types/playlist";
 import { User } from "../@types/user";
 import { DownloadOptions } from "../@types/download";
 import { SearchOptions, SearchResponse } from "../@types/search";
+
+import { getClientId } from "./services/get-client-id";
+import { search } from "./services/search";
+import { download } from "./services/download";
 import { getUser } from "./services/user";
 import { getTrack, getTracksByIds, getTrending } from "./services/tracks";
 import { getPlaylist } from "./services/playlist";
@@ -33,30 +33,41 @@ export class SoundCloud {
   };
 
   public users = {
-    getUser: async (url: string): Promise<User> =>
-      await getUser(this.clientId, url),
+    getUser: async (url: string): Promise<User> => {
+      if (!this.clientId) throw Error("Require client_id");
+      return await getUser(this.clientId, url);
+    },
   };
 
   public tracks = {
-    getTracksByIds: async (ids: number[]): Promise<Track[]> =>
-      await getTracksByIds(this.clientId, ids),
+    getTracksByIds: async (ids: number[]): Promise<Track[]> => {
+      if (!this.clientId) throw Error("Require client_id");
+      return await getTracksByIds(this.clientId, ids);
+    },
 
-    getTrack: async (url: string): Promise<Track> =>
-      await getTrack(this.clientId, url),
+    getTrack: async (url: string): Promise<Track> => {
+      if (!this.clientId) throw Error("Require client_id");
+      return await getTrack(this.clientId, url);
+    },
 
-    getTrending: async (options?: TrendingOptions): Promise<Track> =>
-      await getTrending(this.clientId, options),
+    getTrending: async (options?: TrendingOptions): Promise<Track> => {
+      if (!this.clientId) throw Error("Require client_id");
+      return await getTrending(this.clientId, options);
+    },
   };
 
   public playlists = {
-    getPlaylist: async (url: string): Promise<Playlist> =>
-      await getPlaylist(this.clientId, url),
+    getPlaylist: async (url: string): Promise<Playlist> => {
+      if (!this.clientId) throw Error("Require client_id");
+      return await getPlaylist(this.clientId, url);
+    },
   };
 
   public download = async (
     url: string,
     downloadOptions?: DownloadOptions
   ): Promise<m3u8stream.Stream> => {
+    if (!this.clientId) throw Error("Require client_id");
     return await download(this.clientId, url, downloadOptions);
   };
 }
