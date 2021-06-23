@@ -28,37 +28,37 @@ export class SoundCloud {
   public search = async (
     searchOptions: SearchOptions
   ): Promise<SearchResponse> => {
-    if (!this.clientId) throw Error("Require client_id");
+    this.checkClientId();
     return search(this.clientId, searchOptions);
   };
 
   public users = {
     getUser: async (url: string): Promise<User> => {
-      if (!this.clientId) throw Error("Require client_id");
+      this.checkClientId();
       return await getUser(this.clientId, url);
     },
   };
 
   public tracks = {
     getTracksByIds: async (ids: number[]): Promise<Track[]> => {
-      if (!this.clientId) throw Error("Require client_id");
+      this.checkClientId();
       return await getTracksByIds(this.clientId, ids);
     },
 
     getTrack: async (url: string): Promise<Track> => {
-      if (!this.clientId) throw Error("Require client_id");
+      this.checkClientId();
       return await getTrack(this.clientId, url);
     },
 
     getTrending: async (options?: TrendingOptions): Promise<Track> => {
-      if (!this.clientId) throw Error("Require client_id");
+      this.checkClientId();
       return await getTrending(this.clientId, options);
     },
   };
 
   public playlists = {
     getPlaylist: async (url: string): Promise<Playlist> => {
-      if (!this.clientId) throw Error("Require client_id");
+      this.checkClientId();
       return await getPlaylist(this.clientId, url);
     },
   };
@@ -67,9 +67,14 @@ export class SoundCloud {
     url: string,
     downloadOptions?: DownloadOptions
   ): Promise<m3u8stream.Stream> => {
-    if (!this.clientId) throw Error("Require client_id");
+    this.checkClientId();
     return await download(this.clientId, url, downloadOptions);
   };
+
+  private checkClientId() {
+    if (!this.clientId)
+      throw Error("Require client_id. Run .connect() firstly");
+  }
 }
 
 export { Playlist } from "../@types/playlist";
