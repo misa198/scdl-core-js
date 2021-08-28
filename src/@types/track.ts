@@ -5,7 +5,7 @@ export interface TrendingOptions {
   offset?: number;
 }
 
-interface Visual {
+export interface Visual {
   urn: string;
   entry_time: number;
   visual_url: string;
@@ -84,4 +84,11 @@ export interface Track {
   monetization_model: string;
   policy: string;
   user: User;
+}
+
+export interface TrendingTrackResponse {
+  collection: Track[];
+  kind: string;
+  next_href?: string;
+  query_urn?: string;
 }

@@ -1,5 +1,5 @@
-import { Playlist } from "../../@types/playlist";
-import { Track } from "../../@types/track";
+import { Playlist } from "../@types/playlist";
+import { Track } from "../@types/track";
 
 import { getSingleItemInfo } from "./base-info";
 import { getTracksByIds } from "./tracks";

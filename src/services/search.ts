@@ -1,7 +1,7 @@
 import axios from "axios";
 
 import { apiBaseUrl } from "../constants/configs";
-import { SearchOptions, SearchResponse } from "../../@types/search";
+import { SearchOptions, SearchResponse } from "../@types/search";
 
 export const search = async (
   clientId: string,

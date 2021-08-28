@@ -1,8 +1,8 @@
 import axios from "axios";
 
-import { Playlist } from "../../@types/playlist";
-import { Track } from "../../@types/track";
-import { User } from "../../@types/user";
+import { Playlist } from "../@types/playlist";
+import { Track } from "../@types/track";
+import { User } from "../@types/user";
 
 import { apiBaseUrl } from "../constants/configs";
 

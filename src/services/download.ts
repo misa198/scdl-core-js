@@ -1,7 +1,7 @@
 import axios from "axios";
 import * as m3u8stream from "m3u8stream";
 
-import { DownloadOptions } from "../../@types/download";
+import { DownloadOptions } from "../@types/download";
 import { getTrack } from "./tracks";
 
 const getTrackStream = (url: string, downloadOptions?: DownloadOptions) => {

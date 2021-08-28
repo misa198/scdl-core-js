@@ -1,10 +1,10 @@
 import * as m3u8stream from "m3u8stream";
 
-import { Track, TrendingOptions } from "../@types/track";
-import { Playlist } from "../@types/playlist";
-import { User } from "../@types/user";
-import { DownloadOptions } from "../@types/download";
-import { SearchOptions, SearchResponse } from "../@types/search";
+import { Track, TrendingOptions, TrendingTrackResponse } from "./@types/track";
+import { Playlist } from "./@types/playlist";
+import { User } from "./@types/user";
+import { DownloadOptions } from "./@types/download";
+import { SearchOptions, SearchResponse } from "./@types/search";
 
 import { getClientId } from "./services/get-client-id";
 import { search } from "./services/search";
@@ -50,7 +50,9 @@ export class SoundCloud {
       return await getTrack(this.clientId, url);
     },
 
-    getTrending: async (options?: TrendingOptions): Promise<Track> => {
+    getTrending: async (
+      options?: TrendingOptions
+    ): Promise<TrendingTrackResponse> => {
       this.checkClientId();
       return await getTrending(this.clientId, options);
     },
@@ -77,7 +79,7 @@ export class SoundCloud {
   }
 }
 
-export { Playlist } from "../@types/playlist";
-export { SearchOptions, SearchResponse } from "../@types/search";
-export { Track } from "../@types/track";
-export { User } from "../@types/user";
+export * from "./@types/playlist";
+export * from "./@types/search";
+export * from "./@types/track";
+export * from "./@types/user";

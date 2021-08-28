@@ -1,6 +1,6 @@
 import axios from "axios";
 
-import { Track, TrendingOptions } from "../../@types/track";
+import { Track, TrendingOptions, TrendingTrackResponse } from "../@types/track";
 
 import { apiBaseUrl } from "../constants/configs";
 import { getSingleItemInfo } from "./base-info";
@@ -36,7 +36,7 @@ export const getTrack = async (
 export const getTrending = async (
   clientId: string,
   options?: TrendingOptions
-): Promise<Track> => {
+): Promise<TrendingTrackResponse> => {
   try {
     const { offset = 0, limit = 20 } = options || { offset: 0, limit: 20 };
     const requestUrl = `${apiBaseUrl}/featured_tracks/top/all-music?offset=${offset}&limit=${limit}&client_id=${clientId}`;
