@@ -7,7 +7,7 @@ import { getTrack } from "./tracks";
 const getTrackStream = (url: string, downloadOptions?: DownloadOptions) => {
   try {
     return m3u8stream.default(url, {
-      highWaterMark: downloadOptions?.highWaterMark || 16,
+      highWaterMark: downloadOptions?.highWaterMark || 16 * 1024,
     });
   } catch (e) {
     throw "Invalid url";
