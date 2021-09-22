@@ -1,7 +1,7 @@
 # scdl-core
 
 <p align="center">
-  <img src="./docs/banner.png" width="500px">
+  <img src="https://raw.githubusercontent.com/misa198/scdl-core/master/docs/banner.png" width="500px">
 </p>
 
 - Module for SoundCloud to download and get info tracks and playlists.
