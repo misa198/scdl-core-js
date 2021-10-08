@@ -17,25 +17,28 @@
 const fs = require("fs");
 const { SoundCloud } = require("scdl-core");
 
-const scdl = new SoundCloud();
-scdl.connect().then(() => {
-  scdl
-    .download(
-      "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
-    )
-    .then((stream) => stream.pipe(fs.createWriteStream("song.mp3")));
-});
+const scdl = await SoundCloud.create();
+const stream = await scdl.download(
+  "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
+);
+stream.pipe(fs.createWriteStream("song.mp3"));
 ```
 
 # API
 
-## connect
+## Instantiate scdl object
 
 ```js
-// SoundCloud API require a client_id.
-// When you instantiate scdl object, you need to call connect method to get client_id
-// Only need to call once on initialization
+// 2 ways to instantiate scdl object
 
+// #1
+const { SoundCloud } = require("scdl-core");
+const scdl = await SoundCloud.create();
+
+// #2
+
+const { SoundCloud } = require("scdl-core");
+// Only need to call "connect" method once on initialization
 scdl.connect().then(() => {
   // Do something
 });

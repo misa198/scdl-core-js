@@ -1,7 +1,5 @@
 import axios from "axios";
-
 import { Track, TrendingOptions, TrendingTrackResponse } from "../@types/track";
-
 import { apiBaseUrl } from "../constants/configs";
 import { getSingleItemInfo } from "./base-info";
 

@@ -1,7 +1,6 @@
 import axios from "axios";
-
-import { clientIdRegex, scriptUrl } from "../constants/regex";
 import { soundCloudUrl } from "../constants/configs";
+import { clientIdRegex, scriptUrl } from "../constants/regex";
 
 export const getClientId = async (): Promise<string> => {
   try {
