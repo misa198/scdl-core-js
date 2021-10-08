@@ -1,23 +1,27 @@
 import * as m3u8stream from "m3u8stream";
-
-import { Track, TrendingOptions, TrendingTrackResponse } from "./@types/track";
-import { Playlist } from "./@types/playlist";
-import { User } from "./@types/user";
 import { DownloadOptions } from "./@types/download";
+import { Playlist } from "./@types/playlist";
 import { SearchOptions, SearchResponse } from "./@types/search";
-
-import { getClientId } from "./services/get-client-id";
-import { search } from "./services/search";
+import { Track, TrendingOptions, TrendingTrackResponse } from "./@types/track";
+import { User } from "./@types/user";
 import { download } from "./services/download";
-import { getUser } from "./services/user";
-import { getTrack, getTracksByIds, getTrending } from "./services/tracks";
+import { getClientId } from "./services/get-client-id";
 import { getPlaylist } from "./services/playlist";
+import { search } from "./services/search";
+import { getTrack, getTracksByIds, getTrending } from "./services/tracks";
+import { getUser } from "./services/user";
 
 export class SoundCloud {
   private clientId: string;
 
   constructor() {
     this.clientId = "";
+  }
+
+  public static async create(): Promise<SoundCloud> {
+    const scdl = new SoundCloud();
+    await scdl.connect();
+    return scdl;
   }
 
   public connect = async (): Promise<void> => {

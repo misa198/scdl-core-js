@@ -1,5 +1,4 @@
 import { User } from "../@types/user";
-
 import { getSingleItemInfo } from "./base-info";
 
 export const getUser = async (clientId: string, url: string): Promise<User> => {
