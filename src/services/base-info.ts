@@ -11,7 +11,7 @@ export const getSingleItemInfo = async (
   const requestUrl = `${apiBaseUrl}/resolve?url=${url}&client_id=${clientId}`;
   try {
     const response = await axios.get(requestUrl);
-    return response.data;
+    return response.data as Playlist | Track | User;
   } catch (e) {
     throw "Invalid url";
   }

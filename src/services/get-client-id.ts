@@ -4,7 +4,7 @@ import { clientIdRegex, scriptUrl } from "../constants/regex";
 
 export const getClientId = async (): Promise<string> => {
   try {
-    const soundCloudDom = (await axios.get(soundCloudUrl)).data;
+    const soundCloudDom = (await axios.get(soundCloudUrl)).data as string;
     const paths = soundCloudDom.split('<script crossorigin src="');
     const urls: string[] = [];
     paths.forEach((path: string) => {
@@ -15,7 +15,7 @@ export const getClientId = async (): Promise<string> => {
 
     for (const url of urls) {
       const response = await axios(url);
-      const matchResult = response.data.match(clientIdRegex);
+      const matchResult = (response.data as string).match(clientIdRegex);
       if (matchResult !== null) {
         return matchResult[1] as string;
       }

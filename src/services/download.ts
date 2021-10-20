@@ -24,7 +24,7 @@ const getM3u8Url = async (clientId: string, url: string): Promise<string> => {
         "Accept-Encoding": "gzip, deflate, br",
       },
     });
-    return response.data.url;
+    return (response.data as { url: string }).url;
   } catch (e) {
     throw "Invalid url";
   }

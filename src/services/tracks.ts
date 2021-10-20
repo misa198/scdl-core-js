@@ -13,7 +13,7 @@ export const getTracksByIds = async (
   );
   try {
     const response = await axios.get(url);
-    return response.data;
+    return response.data as Track[];
   } catch (e) {
     throw "Invalid ids";
   }
@@ -39,7 +39,7 @@ export const getTrending = async (
     const { offset = 0, limit = 20 } = options || { offset: 0, limit: 20 };
     const requestUrl = `${apiBaseUrl}/featured_tracks/top/all-music?offset=${offset}&limit=${limit}&client_id=${clientId}`;
     const tracks = (await axios.get(requestUrl)).data;
-    return tracks;
+    return tracks as TrendingTrackResponse;
   } catch (e) {
     throw "Error";
   }

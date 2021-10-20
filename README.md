@@ -36,8 +36,8 @@ const { SoundCloud } = require("scdl-core");
 const scdl = await SoundCloud.create();
 
 // #2
-
 const { SoundCloud } = require("scdl-core");
+const scdl = new SoundCloud();
 // Only need to call "connect" method once on initialization
 scdl.connect().then(() => {
   // Do something
