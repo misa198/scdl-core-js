@@ -13,8 +13,7 @@ export const getPlaylist = async (
   } catch (e) {
     throw "Invalid url";
   }
-  const tracks = playlist.tracks;
-
+  const { tracks } = playlist;
   let loadedTracks: Track[] = [];
   const unloadedTrackIds: number[] = [];
 

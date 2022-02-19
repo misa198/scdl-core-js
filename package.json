@@ -1,6 +1,6 @@
 {
   "name": "scdl-core",
-  "version": "1.0.19",
+  "version": "1.0.20",
   "description": "SoundCloud downloader",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,6 +36,7 @@
   "homepage": "https://misa198.github.io/scdl-core",
   "devDependencies": {
     "@types/jest": "^27.0.1",
+    "@types/lodash": "^4.14.178",
     "@types/node": "^15.6.0",
     "@typescript-eslint/eslint-plugin": "^4.24.0",
     "@typescript-eslint/parser": "^4.24.0",
@@ -46,6 +47,7 @@
   },
   "dependencies": {
     "axios": "^0.23.0",
+    "lodash": "^4.17.21",
     "m3u8stream": "^0.8.4"
   }
 }

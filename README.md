@@ -34,6 +34,10 @@ stream.pipe(fs.createWriteStream("song.mp3"));
 // #1
 const { SoundCloud } = require("scdl-core");
 const scdl = await SoundCloud.create();
+const stream = await scdl.download(
+  "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
+);
+stream.pipe(fs.createWriteStream("song.mp3"));
 
 // #2
 const { SoundCloud } = require("scdl-core");
@@ -41,6 +45,10 @@ const scdl = new SoundCloud();
 // Only need to call "connect" method once on initialization
 scdl.connect().then(() => {
   // Do something
+  const stream = await scdl.download(
+    "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
+  );
+  stream.pipe(fs.createWriteStream("song.mp3"));
 });
 ```
 

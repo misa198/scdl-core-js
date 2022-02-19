@@ -1,21 +1,29 @@
 import axios from "axios";
+import _ from "lodash";
 import { Track, TrendingOptions, TrendingTrackResponse } from "../@types/track";
 import { apiBaseUrl } from "../constants/configs";
 import { getSingleItemInfo } from "./base-info";
+
+const IDS_LENGTH = 50;
 
 export const getTracksByIds = async (
   clientId: string,
   ids: number[]
 ): Promise<Track[]> => {
-  const _ids = ids.join(",");
-  const url = encodeURI(
-    `${apiBaseUrl}/tracks?ids=${_ids}&client_id=${clientId}`
-  );
+  const chunkedIds = _.chunk(ids, IDS_LENGTH);
+  const res: Track[] = [];
   try {
-    const response = await axios.get(url);
-    return response.data as Track[];
+    for (const chunedId of chunkedIds) {
+      const _ids = chunedId.join(",");
+      const url = encodeURI(
+        `${apiBaseUrl}/tracks?ids=${_ids}&client_id=${clientId}`
+      );
+      const response = await axios.get(url);
+      res.push(...(response.data as Track[]));
+    }
+    return res;
   } catch (e) {
-    throw "Invalid ids";
+    throw `Invalid ids: ${ids}`;
   }
 };
 

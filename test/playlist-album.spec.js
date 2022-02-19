@@ -6,8 +6,10 @@ describe("Get playlist/album", () => {
     await scdl.connect();
 
     const permalink =
-      "https://soundcloud.com/martingarrix/sets/martin-garrix-matisse-sadko";
+      // "https://soundcloud.com/martingarrix/sets/martin-garrix-matisse-sadko";
+      "https://soundcloud.com/sertac-sayrin/sets/pisiko-trap-elektro";
     const playlist = await scdl.playlists.getPlaylist(permalink);
+    console.log(playlist.tracks.length);
     expect(playlist.permalink_url).toEqual(permalink);
   });
 });
