@@ -6,11 +6,9 @@ describe("Connect", () => {
   const limit = 5;
 
   it("Returns a valid object with a maximum collection length of <limit>", async () => {
-    const soundCloud = new SoundCloud();
-    await soundCloud.connect();
-
+    await SoundCloud.connect();
     for (const filter of filters) {
-      const result = await soundCloud.search({
+      const result = await SoundCloud.search({
         query,
         filter,
         limit,

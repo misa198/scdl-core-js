@@ -5,8 +5,8 @@ describe("Create", () => {
   const limit = 5;
 
   it("create a valid SoundCloud object that can return result when search", async () => {
-    const soundCloud = await SoundCloud.create();
-    const result = await soundCloud.search({
+    await SoundCloud.connect();
+    const result = await SoundCloud.search({
       query,
       limit,
     });

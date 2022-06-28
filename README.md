@@ -17,8 +17,8 @@
 const fs = require("fs");
 const { SoundCloud } = require("scdl-core");
 
-const scdl = await SoundCloud.create();
-const stream = await scdl.download(
+await SoundCloud.connect();
+const stream = await SoundCloud.download(
   "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
 );
 stream.pipe(fs.createWriteStream("song.mp3"));
@@ -26,36 +26,22 @@ stream.pipe(fs.createWriteStream("song.mp3"));
 
 # API
 
-## Instantiate scdl object
+## connect
 
 ```js
-// 2 ways to instantiate scdl object
-
-// #1
+// Used to get the SoundCloud client_id. Call 1 time at the top of your app.
 const { SoundCloud } = require("scdl-core");
-const scdl = await SoundCloud.create();
-const stream = await scdl.download(
+await SoundCloud.connect();
+await SoundCloud.download(
   "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
 );
 stream.pipe(fs.createWriteStream("song.mp3"));
-
-// #2
-const { SoundCloud } = require("scdl-core");
-const scdl = new SoundCloud();
-// Only need to call "connect" method once on initialization
-scdl.connect().then(() => {
-  // Do something
-  const stream = await scdl.download(
-    "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep"
-  );
-  stream.pipe(fs.createWriteStream("song.mp3"));
-});
 ```
 
 ## search
 
 ```js
-const result = await scdl.search({
+const result = await SoundCloud.search({
   query: string,
   limit?: number, // Default: 20
   offset?: number, // Default: 0
@@ -69,7 +55,7 @@ const result = await scdl.search({
 
 ```js
 const ids = [578933490, 499766382];
-const tracks = await scdl.tracks.getTracksByIds(ids);
+const tracks = await SoundCloud.tracks.getTracksByIds(ids);
 ```
 
 #### getTrack
@@ -77,13 +63,13 @@ const tracks = await scdl.tracks.getTracksByIds(ids);
 ```js
 const permalink =
   "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep";
-const track = await scdl.tracks.getTrack(permalink);
+const track = await SoundCloud.tracks.getTrack(permalink);
 ```
 
 #### getTrending
 
 ```js
-const trendingTracks = await scdl.tracks.getTrending({
+const trendingTracks = await SoundCloud.tracks.getTrending({
   limit?: number, // Default: 20
   offset?: number // Default: 0
 });
@@ -96,7 +82,7 @@ const trendingTracks = await scdl.tracks.getTrending({
 ```js
 const permalink =
   "https://soundcloud.com/martingarrix/sets/martin-garrix-matisse-sadko";
-const playlist = await scdl.playlists.getPlaylist(permalink);
+const playlist = await SoundCloud.playlists.getPlaylist(permalink);
 ```
 
 ## users
@@ -105,7 +91,7 @@ const playlist = await scdl.playlists.getPlaylist(permalink);
 
 ```js
 const permalink = "https://soundcloud.com/martingarrix";
-const user = await scdl.users.getUser(permalink);
+const user = await SoundCloud.users.getUser(permalink);
 ```
 
 ## download
@@ -113,12 +99,12 @@ const user = await scdl.users.getUser(permalink);
 ```js
 const permalink =
   "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep";
-const stream = await scdl.download(permalink);
+const stream = await SoundCloud.download(permalink);
 stream.pipe(fs.createWriteStream("song.mp3"));
 
 // For streaming, you can customize the `highWaterMark` value to reduce lag if the internet is not good.
 // Example:
-const stream = await scdl.download(permalink, {
+const stream = await SoundCloud.download(permalink, {
   highWaterMark: 1 << 25, // 32Mb, default is 16kb
 });
 ```
@@ -131,7 +117,7 @@ const voiceChannel = message.member.voiceChannel;
 voiceChannel
   .join()
   .then((connection) => {
-    scdl.download(trackPermalink).then((stream) => {
+    SoundCloud.download(trackPermalink).then((stream) => {
       connection.play(stream);
     });
   })
@@ -147,7 +133,7 @@ const voiceConnection = joinVoiceChannel({
   adapterCreator,
 });
 voiceConnection.subscribe(audioPlayer);
-const stream = await scdl.download(SONG_URL);
+const stream = await SoundCloud.download(SONG_URL);
 const audioResource = createAudioResource(stream);
 audioPlayer.play(audioResource);
 ```

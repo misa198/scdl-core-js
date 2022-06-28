@@ -12,73 +12,63 @@ import { getTrack, getTracksByIds, getTrending } from "./services/tracks";
 import { getUser } from "./services/user";
 
 export class SoundCloud {
-  private clientId: string;
+  private static clientId: string | null = null;
 
-  constructor() {
-    this.clientId = "";
-  }
-
-  public static async create(): Promise<SoundCloud> {
-    const scdl = new SoundCloud();
-    await scdl.connect();
-    return scdl;
-  }
-
-  public connect = async (): Promise<void> => {
+  public static connect = async (): Promise<void> => {
     const clientId = await getClientId();
-    this.clientId = clientId;
+    SoundCloud.clientId = clientId;
   };
 
-  public search = async (
+  public static search = async (
     searchOptions: SearchOptions
   ): Promise<SearchResponse> => {
     this.checkClientId();
-    return search(this.clientId, searchOptions);
+    return search(SoundCloud.clientId as string, searchOptions);
   };
 
-  public users = {
+  public static users = {
     getUser: async (url: string): Promise<User> => {
       this.checkClientId();
-      return await getUser(this.clientId, url);
+      return await getUser(SoundCloud.clientId as string, url);
     },
   };
 
-  public tracks = {
+  public static tracks = {
     getTracksByIds: async (ids: number[]): Promise<Track[]> => {
-      this.checkClientId();
-      return await getTracksByIds(this.clientId, ids);
+      SoundCloud.checkClientId();
+      return await getTracksByIds(SoundCloud.clientId as string, ids);
     },
 
     getTrack: async (url: string): Promise<Track> => {
-      this.checkClientId();
-      return await getTrack(this.clientId, url);
+      SoundCloud.checkClientId();
+      return await getTrack(SoundCloud.clientId as string, url);
     },
 
     getTrending: async (
       options?: TrendingOptions
     ): Promise<TrendingTrackResponse> => {
-      this.checkClientId();
-      return await getTrending(this.clientId, options);
+      SoundCloud.checkClientId();
+      return await getTrending(SoundCloud.clientId as string, options);
     },
   };
 
-  public playlists = {
+  public static playlists = {
     getPlaylist: async (url: string): Promise<Playlist> => {
-      this.checkClientId();
-      return await getPlaylist(this.clientId, url);
+      SoundCloud.checkClientId();
+      return await getPlaylist(SoundCloud.clientId as string, url);
     },
   };
 
-  public download = async (
+  public static download = async (
     url: string,
     downloadOptions?: DownloadOptions
   ): Promise<m3u8stream.Stream> => {
-    this.checkClientId();
-    return await download(this.clientId, url, downloadOptions);
+    SoundCloud.checkClientId();
+    return await download(SoundCloud.clientId as string, url, downloadOptions);
   };
 
-  private checkClientId() {
-    if (!this.clientId)
+  private static checkClientId() {
+    if (!SoundCloud.clientId)
       throw Error("Require client_id. Run .connect() firstly");
   }
 }

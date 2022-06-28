@@ -1,6 +1,6 @@
 {
   "name": "scdl-core",
-  "version": "1.0.20",
+  "version": "1.1.0",
   "description": "SoundCloud downloader",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

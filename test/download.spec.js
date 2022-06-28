@@ -14,12 +14,10 @@ const concat = (stream, callback) => {
 
 describe("Download tracks", () => {
   it("Stream is readable", async () => {
-    const scdl = new SoundCloud();
-    await scdl.connect();
-
+    await SoundCloud.connect();
     const permalink =
       "https://soundcloud.com/martingarrix/martin-garrix-feat-bonn-no-sleep";
-    const stream = await scdl.download(permalink);
+    const stream = await SoundCloud.download(permalink);
     concat(stream, (err, body) => {
       expect(err).toBeNull();
       expect(Boolean(body)).toEqual(true);
